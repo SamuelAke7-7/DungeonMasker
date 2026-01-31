@@ -8,5 +8,6 @@ public enum CellType
     Entry = 2,       // Puerta - entrada
     Exit = 3,        // Puerta - salida
     WallChanger = 4,
-    Monster = 5
+    Monster = 5,
+    Objeto = 6
 }

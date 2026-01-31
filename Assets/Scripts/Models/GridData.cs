@@ -12,4 +12,5 @@ public class GridData
     public int endY;
     public CellSecret[] cellSecret;
     public CellMonster[] cellMonster;
+    public CellObject[] cellObject;
 }

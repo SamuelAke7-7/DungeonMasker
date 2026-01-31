@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,13 +11,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rotationSpeed = 180f; // Velocidad de rotación (grados por segundo)
     [SerializeField] private float stickDeadZone = 0.5f; // Umbral para el stick analógico del gamepad
     
+    private bool canMove = true;
     private bool isMoving = false; // Flag para evitar múltiples movimientos simultáneos
     private bool isRotating = false; // Flag para evitar múltiples rotaciones simultáneas
     private bool gamepadInputProcessed = false; // Flag para evitar procesar el mismo input múltiples veces
     private Vector2 previousStickValue = Vector2.zero; // Valor anterior del stick para detectar cambios
     
+    public static PlayerController Instance;
+
+    void Awake(){
+        Instance = this;
+    }
+
     void Update()
     {
+        if (!canMove) return;
         // Solo procesar input si no se está moviendo o rotando
         if (isMoving || isRotating)
             return;
@@ -225,5 +234,9 @@ public class PlayerController : MonoBehaviour
         // Asegurar que llegamos exactamente al ángulo objetivo
         transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
         isRotating = false;
+    }
+
+    public void SetAbleWalk(bool isWalkable){
+        this.canMove = isWalkable;
     }
 }
