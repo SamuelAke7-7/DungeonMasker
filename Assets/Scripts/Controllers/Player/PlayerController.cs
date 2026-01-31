@@ -146,13 +146,27 @@ public class PlayerController : MonoBehaviour
     private void MoveForward()
     {
         Vector3 targetPosition = transform.position + transform.forward * blockSize;
+        if (!CanMoveTo(targetPosition)) return;
         StartCoroutine(MoveToPosition(targetPosition));
     }
     
     private void MoveBackward()
     {
         Vector3 targetPosition = transform.position - transform.forward * blockSize;
+        if (!CanMoveTo(targetPosition)) return;
         StartCoroutine(MoveToPosition(targetPosition));
+    }
+    
+    /// <summary>
+    /// Verifica si se puede mover a la posición indicada en mundo.
+    /// Usa WorldToGrid para convertir correctamente las coordenadas del grid.
+    /// </summary>
+    private bool CanMoveTo(Vector3 worldPosition)
+    {
+        if (GridMapController.Instance == null) return false;
+        
+        Vector2Int gridCell = GridMapController.Instance.WorldToGrid(worldPosition);
+        return GridMapController.Instance.IsCellWalkable(gridCell.x, gridCell.y);
     }
     
     private void RotateLeft()
