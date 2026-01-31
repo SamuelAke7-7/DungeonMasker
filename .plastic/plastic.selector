@@ -1,0 +1,3 @@
+repository "DungeonMasker@Bipper7u7@cloud"
+  path "/"
+    smartbranch "/main/dev"
