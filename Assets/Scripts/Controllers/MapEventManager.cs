@@ -5,7 +5,14 @@ using UnityEngine.UI;
 public class MapEventManager : MonoBehaviour
 {
     [SerializeField] private GameObject uiPanel; // Arrastra aquí tu Canvas o Panel
+    public GameObject panel;
+    [SerializeField] private TextMeshProUGUI text;
 
+    public static MapEventManager instance;
+    private void Awake()
+    {
+        instance = this;
+    }
     private void OnTriggerEnter(Collider other)
     {
         // Comprobamos si el objeto con el que colisionamos implementa IInteractuable
