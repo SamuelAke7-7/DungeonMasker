@@ -52,8 +52,11 @@ MonoBehaviour:
   obstacleColor: {r: 1, g: 0, b: 0, a: 1}
   pathColor: {r: 0, g: 1, b: 0, a: 1}
   doorColor: {r: 0, g: 0, b: 1, a: 1}
+  monsterColor: {r: 0.4980392, g: 1, b: 0.8313726, a: 1}
   wallPrefab: {fileID: 3824148903420253234, guid: 77e04bd6acc71a448b2335efc710e08c, type: 3}
   wallSecretPrefab: {fileID: 3824148903420253234, guid: 2df6ea911dfd9fd48ac1d565aafebd85, type: 3}
+  listMonsterPrefabs:
+  - {fileID: 66043259475815006, guid: 662e49f1fa082744e8939c5c0c70d27b, type: 3}
 --- !u!114 &5801263663502861396
 MonoBehaviour:
   m_ObjectHideFlags: 0

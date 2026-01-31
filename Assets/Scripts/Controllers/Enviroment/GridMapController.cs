@@ -25,6 +25,9 @@ public class GridMapController : MonoBehaviour
     public GameObject wallPrefab;
     public GameObject wallSecretPrefab;
 
+    public Transform wallParent;
+    public Transform enemyParent;
+
     public GameObject[] listMonsterPrefabs;
 
     private CellType[,] grid;
@@ -69,6 +72,7 @@ public class GridMapController : MonoBehaviour
                         worldPosition.x += 0.5f;
                         worldPosition.z += 0.5f;
                         GameObject wall = Instantiate(wallPrefab, worldPosition, Quaternion.identity);
+                        wall.transform.parent = wallParent;
                     }
                     if (cellType == CellType.WallChanger)
                     {
@@ -78,12 +82,14 @@ public class GridMapController : MonoBehaviour
                         GameObject wallChanger = Instantiate(wallSecretPrefab, worldPosition, Quaternion.identity);
                         TypeMask typeMask = listCellSecrets.FirstOrDefault((cell) => cell.x == x && cell.z == y ).type;
                         wallChanger.GetComponent<WallSecretBehaviourUseCase>().type = typeMask;
+                        wallChanger.transform.parent = wallParent;
                     } else if(cellType == CellType.Monster){
                         Vector3 worldPosition = GridToWorld(x, y);
                         worldPosition.x += 0.5f;
                         worldPosition.z += 0.5f;
                         MonsterType type = listCellMonsters.FirstOrDefault((monster) => monster.x == x && monster.z == y).type;
-                        GameObject wall = Instantiate(listMonsterPrefabs[(int)type - 1], worldPosition, Quaternion.identity);
+                        GameObject enemy = Instantiate(listMonsterPrefabs[(int)type - 1], worldPosition, Quaternion.identity);
+                        enemy.transform.parent = enemyParent;
                     }
                 }
             }
