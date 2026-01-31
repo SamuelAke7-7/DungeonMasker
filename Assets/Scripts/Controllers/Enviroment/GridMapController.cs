@@ -24,15 +24,18 @@ public class GridMapController : MonoBehaviour
     
     public GameObject wallPrefab;
     public GameObject wallSecretPrefab;
+    public GameObject[] listObjectPrefabs;
 
     public Transform wallParent;
     public Transform enemyParent;
+    public Transform objectParent;
 
     public GameObject[] listMonsterPrefabs;
 
     private CellType[,] grid;
     private List<CellSecret> listCellSecrets;
     private List<CellMonster> listCellMonsters;
+    private List<CellObject> listCellObjects;
     private Vector2Int startEntryPosition;
     private Vector2Int endExitPosition;
     
@@ -62,37 +65,53 @@ public class GridMapController : MonoBehaviour
 
     void SetWallsPosition(){
         for (int y = 0; y < gridHeight; y++)
+        {
+            for (int x = 0; x < gridWidth; x++)
             {
-                for (int x = 0; x < gridWidth; x++)
+                CellType cellType = GetCellType(x, y);
+                if (cellType == CellType.Obstacle)
                 {
-                    CellType cellType = GetCellType(x, y);
-                    if (cellType == CellType.Obstacle)
+                    Vector3 worldPosition = GridToWorld(x, y);
+                    worldPosition.x += 0.5f;
+                    worldPosition.z += 0.5f;
+                    GameObject wall = Instantiate(wallPrefab, worldPosition, Quaternion.identity);
+                    wall.transform.parent = wallParent;
+                }else if (cellType == CellType.WallChanger)
+                {
+                    Vector3 worldPosition = GridToWorld(x, y);
+                    worldPosition.x += 0.5f;
+                    worldPosition.z += 0.5f;
+                    GameObject wallChanger = Instantiate(wallSecretPrefab, worldPosition, Quaternion.identity);
+                    TypeMask typeMask = listCellSecrets.FirstOrDefault((cell) => cell.x == x && cell.z == y ).type;
+                    wallChanger.GetComponent<WallSecretBehaviourUseCase>().type = typeMask;
+                    wallChanger.transform.parent = wallParent;
+                } else if(cellType == CellType.Monster){
+                    Vector3 worldPosition = GridToWorld(x, y);
+                    worldPosition.x += 0.5f;
+                    worldPosition.z += 0.5f;
+                    MonsterType type = listCellMonsters.FirstOrDefault((monster) => monster.x == x && monster.z == y).type;
+                    GameObject enemy = Instantiate(listMonsterPrefabs[(int)type - 1], worldPosition, Quaternion.identity);
+                    enemy.transform.parent = enemyParent;
+                } else if (cellType == CellType.Objeto)
+                {
+                    Vector3 worldPosition = GridToWorld(x, y);
+                    worldPosition.x += 0.5f;
+                    worldPosition.z += 0.5f;
+                    CellObject dataObject = listCellObjects.FirstOrDefault((objeto) => objeto.x == x && objeto.z == y);
+                    Debug.Log(dataObject);
+                    GameObject objeto = Instantiate(listObjectPrefabs[dataObject.idPrefab], worldPosition, Quaternion.identity);
+                    objeto.transform.parent = objectParent;
+                    if (dataObject.isWalkable)
                     {
-                        Vector3 worldPosition = GridToWorld(x, y);
-                        worldPosition.x += 0.5f;
-                        worldPosition.z += 0.5f;
-                        GameObject wall = Instantiate(wallPrefab, worldPosition, Quaternion.identity);
-                        wall.transform.parent = wallParent;
+                        ChangeTypeCell(x,y,CellType.Path);
                     }
-                    if (cellType == CellType.WallChanger)
+                    else
                     {
-                        Vector3 worldPosition = GridToWorld(x, y);
-                        worldPosition.x += 0.5f;
-                        worldPosition.z += 0.5f;
-                        GameObject wallChanger = Instantiate(wallSecretPrefab, worldPosition, Quaternion.identity);
-                        TypeMask typeMask = listCellSecrets.FirstOrDefault((cell) => cell.x == x && cell.z == y ).type;
-                        wallChanger.GetComponent<WallSecretBehaviourUseCase>().type = typeMask;
-                        wallChanger.transform.parent = wallParent;
-                    } else if(cellType == CellType.Monster){
-                        Vector3 worldPosition = GridToWorld(x, y);
-                        worldPosition.x += 0.5f;
-                        worldPosition.z += 0.5f;
-                        MonsterType type = listCellMonsters.FirstOrDefault((monster) => monster.x == x && monster.z == y).type;
-                        GameObject enemy = Instantiate(listMonsterPrefabs[(int)type - 1], worldPosition, Quaternion.identity);
-                        enemy.transform.parent = enemyParent;
+                        ChangeTypeCell(x, y, CellType.Obstacle);
                     }
                 }
             }
+        }
     }
     
     /// <summary>
@@ -195,6 +214,7 @@ public class GridMapController : MonoBehaviour
             gridHeight = gridData.height;
             listCellSecrets = gridData.cellSecret.ToList();
             listCellMonsters = gridData.cellMonster.ToList();
+            listCellObjects = gridData.cellObject.ToList();
             grid = new CellType[gridWidth, gridHeight];
             
             // Convertir el array plano a matriz 2D
