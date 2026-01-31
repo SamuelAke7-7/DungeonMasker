@@ -5,5 +5,8 @@ public enum CellType
 {
     Obstacle = 0,  // Obstáculo - no se puede caminar
     Path = 1,      // Camino - se puede caminar
-    Door = 2       // Puerta - entrada o salida
+    Entry = 2,       // Puerta - entrada
+    Exit = 3,        // Puerta - salida
+    WallChanger = 4,
+    Monster = 5
 }

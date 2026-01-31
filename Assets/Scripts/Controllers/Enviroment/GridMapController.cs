@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.IO;
 using System;
+using TMPro;
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// Controlador para gestionar un grid de mapa con diferentes tipos de celdas
@@ -11,34 +14,85 @@ public class GridMapController : MonoBehaviour
     [SerializeField] private int gridWidth = 10;
     [SerializeField] private int gridHeight = 10;
     [SerializeField] private float cellSize = 1f;
-    [SerializeField] private string jsonFileName = "maze_example.json";
+    [SerializeField] private string jsonFileName = "dungeon_map.json";
     
     [Header("Colores de Gizmos")]
     [SerializeField] private Color obstacleColor = Color.red;
     [SerializeField] private Color pathColor = Color.green;
     [SerializeField] private Color doorColor = Color.blue;
+    [SerializeField] private Color monsterColor = Color.aquamarine;
     
+    public GameObject wallPrefab;
+    public GameObject wallSecretPrefab;
+
+    public Transform wallParent;
+    public Transform enemyParent;
+
+    public GameObject[] listMonsterPrefabs;
+
     private CellType[,] grid;
-    private Vector2Int startDoorPosition;
-    private Vector2Int endDoorPosition;
+    private List<CellSecret> listCellSecrets;
+    private List<CellMonster> listCellMonsters;
+    private Vector2Int startEntryPosition;
+    private Vector2Int endExitPosition;
     
-    // Clase para deserializar el JSON
-    [Serializable]
-    private class GridData
+    public static GridMapController Instance { get; private set; }
+    
+    void Awake()
     {
-        public int width;
-        public int height;
-        public int[] cells; // Array plano: cells[y * width + x]
-        public int startX;
-        public int startY;
-        public int endX;
-        public int endY;
+        Instance = this;
     }
     
     void Start()
     {
         // Cargar el grid desde el JSON de ejemplo
         LoadGridFromJSON(jsonFileName);
+        SetPlayerEntryPosition(startEntryPosition);
+        SetWallsPosition();
+    }
+
+    void SetPlayerEntryPosition(Vector2Int position){
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            Vector3 worldPosition = GridToWorld(position.x, position.y);
+            player.transform.position = new Vector3(worldPosition.x + 0.5f, player.transform.position.y, worldPosition.z + 0.5f);
+        }
+    }
+
+    void SetWallsPosition(){
+        for (int y = 0; y < gridHeight; y++)
+            {
+                for (int x = 0; x < gridWidth; x++)
+                {
+                    CellType cellType = GetCellType(x, y);
+                    if (cellType == CellType.Obstacle)
+                    {
+                        Vector3 worldPosition = GridToWorld(x, y);
+                        worldPosition.x += 0.5f;
+                        worldPosition.z += 0.5f;
+                        GameObject wall = Instantiate(wallPrefab, worldPosition, Quaternion.identity);
+                        wall.transform.parent = wallParent;
+                    }
+                    if (cellType == CellType.WallChanger)
+                    {
+                        Vector3 worldPosition = GridToWorld(x, y);
+                        worldPosition.x += 0.5f;
+                        worldPosition.z += 0.5f;
+                        GameObject wallChanger = Instantiate(wallSecretPrefab, worldPosition, Quaternion.identity);
+                        TypeMask typeMask = listCellSecrets.FirstOrDefault((cell) => cell.x == x && cell.z == y ).type;
+                        wallChanger.GetComponent<WallSecretBehaviourUseCase>().type = typeMask;
+                        wallChanger.transform.parent = wallParent;
+                    } else if(cellType == CellType.Monster){
+                        Vector3 worldPosition = GridToWorld(x, y);
+                        worldPosition.x += 0.5f;
+                        worldPosition.z += 0.5f;
+                        MonsterType type = listCellMonsters.FirstOrDefault((monster) => monster.x == x && monster.z == y).type;
+                        GameObject enemy = Instantiate(listMonsterPrefabs[(int)type - 1], worldPosition, Quaternion.identity);
+                        enemy.transform.parent = enemyParent;
+                    }
+                }
+            }
     }
     
     /// <summary>
@@ -58,6 +112,10 @@ public class GridMapController : MonoBehaviour
         
         Debug.Log($"Grid establecido: {gridWidth}x{gridHeight}");
     }
+
+    public void ChangeTypeCell(int x, int y, CellType type){
+        grid[x,y] = type;
+    }
     
     /// <summary>
     /// Obtiene el tipo de celda en una posición específica
@@ -73,12 +131,12 @@ public class GridMapController : MonoBehaviour
     }
     
     /// <summary>
-    /// Verifica si una celda es transitable
+    /// Verifica si una celda es transitable (camino, entrada o salida)
     /// </summary>
     public bool IsCellWalkable(int x, int y)
     {
         CellType cellType = GetCellType(x, y);
-        return cellType == CellType.Path || cellType == CellType.Door;
+        return cellType == CellType.Path || cellType == CellType.Entry || cellType == CellType.Exit || cellType == CellType.Monster;
     }
     
     /// <summary>
@@ -135,6 +193,8 @@ public class GridMapController : MonoBehaviour
             // Inicializar el grid
             gridWidth = gridData.width;
             gridHeight = gridData.height;
+            listCellSecrets = gridData.cellSecret.ToList();
+            listCellMonsters = gridData.cellMonster.ToList();
             grid = new CellType[gridWidth, gridHeight];
             
             // Convertir el array plano a matriz 2D
@@ -155,14 +215,22 @@ public class GridMapController : MonoBehaviour
             }
             
             // Guardar posiciones de las puertas
-            startDoorPosition = new Vector2Int(gridData.startX, gridData.startY);
-            endDoorPosition = new Vector2Int(gridData.endX, gridData.endY);
+            startEntryPosition = new Vector2Int(gridData.startX, gridData.startY);
+            endExitPosition = new Vector2Int(gridData.endX, gridData.endY);
             
             Debug.Log($"Grid cargado desde JSON: {gridWidth}x{gridHeight}");
         }
         catch (Exception e)
         {
             Debug.LogError($"Error al cargar el JSON: {e.Message}");
+        }
+    }
+    
+    void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
         }
     }
     
@@ -232,12 +300,12 @@ public class GridMapController : MonoBehaviour
         // Puerta inicial (arriba a la izquierda)
         int startX = 1;
         int startY = 0;
-        cells[startY * width + startX] = (int)CellType.Door;
+        cells[startY * width + startX] = (int)CellType.Entry;
         
         // Puerta final (abajo a la derecha)
         int endX = width - 2;
         int endY = height - 1;
-        cells[endY * width + endX] = (int)CellType.Door;
+        cells[endY * width + endX] = (int)CellType.Exit;
         
         // Crear el objeto de datos
         GridData gridData = new GridData
@@ -285,7 +353,10 @@ public class GridMapController : MonoBehaviour
                     case CellType.Path:
                         gizmoColor = pathColor;
                         break;
-                    case CellType.Door:
+                    case CellType.Entry:
+                        gizmoColor = doorColor;
+                        break;
+                    case CellType.Exit:
                         gizmoColor = doorColor;
                         break;
                     default:
