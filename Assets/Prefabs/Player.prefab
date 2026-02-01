@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5013934254579493109}
   - component: {fileID: 8389747936155659304}
   - component: {fileID: 1006913203279337763}
+  - component: {fileID: 1306811896244297573}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -145,10 +146,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba8805582291cff449bb008278d461da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  life: 100
+  mana: 100
   blockSize: 1
   moveSpeed: 5
   rotationSpeed: 180
   stickDeadZone: 0.5
+  deadScreenImage: {fileID: 0}
+--- !u!114 &1306811896244297573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2844254784236816535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec52e42030c7847a6a91559155ab708b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapEventManager
+  panel: {fileID: 0}
+  ghostImage: {fileID: 0}
+  healedImage: {fileID: 0}
+  canvasBlinker: {fileID: 0}
+  text: {fileID: 0}
 --- !u!1 &4543909318438645782
 GameObject:
   m_ObjectHideFlags: 0

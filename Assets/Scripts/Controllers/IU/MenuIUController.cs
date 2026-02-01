@@ -8,7 +8,7 @@ public class MenuIUController : MonoBehaviour
     public Transform panelCredits;
 
     public void StartGame(){
-        SceneManager.LoadScene("LevelDesing");
+        SceneManager.LoadScene("Level1");
     }
 
     public void RenderCredits(){
