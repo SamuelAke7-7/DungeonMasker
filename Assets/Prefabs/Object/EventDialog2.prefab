@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7522343286386413019}
   - component: {fileID: -612663765112608402}
   m_Layer: 7
-  m_Name: StartEvent
+  m_Name: EventDialog2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,10 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d5cd7650ef7d4784aa960a603749583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartEvent
-  sprite: {fileID: 21300000, guid: d7abd91a466e64c888598ee2b1d26391, type: 3}
-  isMainDialogue: 1
+  sprite: {fileID: 21300000, guid: 584603f5a23048942a5b7e00321c0df8, type: 3}
   sentences:
-  - Te robe tu alma y estaras atrapado aqui para la eternidad!
+  - Oh tu eres nuevo, a ti tambien te estafo el hechizero? Dicen que la unica mnera
+    de escapar es por la puerta magica en su sala
   colorClaro: {r: 1, g: 0, b: 0, a: 1}
   colorOscuro: {r: 0.3, g: 0, b: 0, a: 1}
 --- !u!114 &-612663765112608402

@@ -119,17 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &56300622 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6265096722706943775, guid: c22c2510da222468ea401d91a2caf186, type: 3}
+--- !u!1 &56300620 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7228180950105856164, guid: c22c2510da222468ea401d91a2caf186, type: 3}
   m_PrefabInstance: {fileID: 95946159}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
 --- !u!1001 &95946159
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -228,6 +222,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2211441922295829999, guid: c22c2510da222468ea401d91a2caf186, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264374985804421173, guid: c22c2510da222468ea401d91a2caf186, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264374985804421173, guid: c22c2510da222468ea401d91a2caf186, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d7abd91a466e64c888598ee2b1d26391, type: 3}
+    - target: {fileID: 3395965830767383230, guid: c22c2510da222468ea401d91a2caf186, type: 3}
+      propertyPath: m_text
+      value: AUCH!!!!!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7228180950105856164, guid: c22c2510da222468ea401d91a2caf186, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7795103687675232286, guid: c22c2510da222468ea401d91a2caf186, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -587,7 +601,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2531955964121812743, guid: 51d2d8a916d42034eaa216993b957994, type: 3}
       propertyPath: listObjectPrefabs.Array.size
-      value: 10
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531955964121812743, guid: 51d2d8a916d42034eaa216993b957994, type: 3}
+      propertyPath: listMonsterPrefabs.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2531955964121812743, guid: 51d2d8a916d42034eaa216993b957994, type: 3}
       propertyPath: 'listObjectPrefabs.Array.data[4]'
@@ -613,6 +631,26 @@ PrefabInstance:
       propertyPath: 'listObjectPrefabs.Array.data[9]'
       value: 
       objectReference: {fileID: 2974300601038611190, guid: a62e29b546471ab499163829f25edb90, type: 3}
+    - target: {fileID: 2531955964121812743, guid: 51d2d8a916d42034eaa216993b957994, type: 3}
+      propertyPath: 'listMonsterPrefabs.Array.data[3]'
+      value: 
+      objectReference: {fileID: 66043259475815006, guid: c6662e3e7195fab4996b93234cc633d0, type: 3}
+    - target: {fileID: 2531955964121812743, guid: 51d2d8a916d42034eaa216993b957994, type: 3}
+      propertyPath: 'listObjectPrefabs.Array.data[10]'
+      value: 
+      objectReference: {fileID: 1222254486792330842, guid: 4bbd7fb93e22b9741aec1a5f2584457e, type: 3}
+    - target: {fileID: 2531955964121812743, guid: 51d2d8a916d42034eaa216993b957994, type: 3}
+      propertyPath: 'listObjectPrefabs.Array.data[11]'
+      value: 
+      objectReference: {fileID: 1222254486792330842, guid: 07e702f52c91cba4da3721445d0a4b79, type: 3}
+    - target: {fileID: 2531955964121812743, guid: 51d2d8a916d42034eaa216993b957994, type: 3}
+      propertyPath: 'listObjectPrefabs.Array.data[12]'
+      value: 
+      objectReference: {fileID: 1222254486792330842, guid: 54f0c13422550324da486c66c61f753c, type: 3}
+    - target: {fileID: 2531955964121812743, guid: 51d2d8a916d42034eaa216993b957994, type: 3}
+      propertyPath: 'listObjectPrefabs.Array.data[13]'
+      value: 
+      objectReference: {fileID: 1222254486792330842, guid: 54f0c13422550324da486c66c61f753c, type: 3}
     - target: {fileID: 3607608691740184205, guid: 51d2d8a916d42034eaa216993b957994, type: 3}
       propertyPath: m_Name
       value: GridMapManager
@@ -1530,7 +1568,7 @@ PrefabInstance:
     - target: {fileID: 1306811896244297573, guid: 98c36edc4b1d8f745aa9c4dcfb622a07, type: 3}
       propertyPath: ghostImage
       value: 
-      objectReference: {fileID: 56300622}
+      objectReference: {fileID: 56300620}
     - target: {fileID: 1306811896244297573, guid: 98c36edc4b1d8f745aa9c4dcfb622a07, type: 3}
       propertyPath: healedImage
       value: 
