@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
         {
             RotateRight();
         }
+
     }
     
     private void ProcessGamepadInput()

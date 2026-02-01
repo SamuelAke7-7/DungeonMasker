@@ -17,6 +17,7 @@ public class ItemData
     public string id;
     public string displayName;
     public ItemType type;
+    public Sprite iconId;
     public Sprite icon;
 
     public override bool Equals(object obj)

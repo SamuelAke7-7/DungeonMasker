@@ -1,27 +1,95 @@
 using System;
 using System.Collections.Generic;
+using UnityEditorInternal;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
     // Optional starting items (set in inspector)
     [SerializeField] private List<ItemData> startingItems = new List<ItemData>();
 
+    private bool _isInventoryOpen = false;
+    public GameObject inventoryPanel;
+    public GameObject Permanents_Grid;
+    public GameObject Consumables_Grid;
+    public GameObject Key_Grid;
+
+    public Transform slotPrefab;
+    public Sprite[] listSprites;
+
     // Internal storage by id
     private readonly HashSet<string> permanentItems = new HashSet<string>();
     private readonly Dictionary<string, int> consumableCounts = new Dictionary<string, int>();
     private readonly HashSet<string> keyItems = new HashSet<string>();
+    private string equippedMaskId = null; // ID de la máscara equipada actualmente
 
     // Keep a registry of known ItemData references (for lookup/display)
     private readonly Dictionary<string, ItemData> registry = new Dictionary<string, ItemData>();
 
+    public static InventoryController Instance { get; private set;} 
     // Events
     public event Action<ItemData> OnItemAdded;
     public event Action<ItemData> OnItemRemoved;
 
+    void Update()
+    { 
+        ProcessKeyboardInput();
+        ProcessGamepadInput();
+    }
+
+    private void ProcessKeyboardInput()
+    {
+        Keyboard keyboard = Keyboard.current;
+        if (keyboard == null)
+            return;
+        
+        if (keyboard.iKey.wasPressedThisFrame)
+        {
+            ToggleInventory();
+        }
+
+        if (keyboard.escapeKey.wasPressedThisFrame && _isInventoryOpen)
+        {
+            ToggleInventory();
+        }
+
+        if (keyboard.tKey.wasPressedThisFrame)//This is my test key T :)
+        {
+            // RemoveItem(new ItemData()
+            // {
+            //     id= "1"
+            // });
+            Debug.Log("Someone pressed the T key");
+        }
+
+    }
+
+    private void ProcessGamepadInput()
+    {
+        Gamepad gamepad = Gamepad.current;
+
+        if (gamepad.yButton.wasPressedThisFrame || gamepad.triangleButton.wasPressedThisFrame)
+        {
+            ToggleInventory();
+        }
+    }
+
     private void Awake()
     {
+        Instance = this;
         // register starting items
+
+        startingItems.Add(new ItemData()
+        {
+            id= "1",
+            displayName= "PrisonerMask",
+            type= ItemType.Permanent,
+            icon = listSprites[0]
+        });
+
         foreach (var it in startingItems)
         {
             if (it == null) continue;
@@ -31,7 +99,9 @@ public class InventoryController : MonoBehaviour
             else
                 AddItem(it, 0);
         }
+
     }
+
 
     private void RegisterItem(ItemData item)
     {
@@ -51,6 +121,8 @@ public class InventoryController : MonoBehaviour
                 if (permanentItems.Contains(item.id)) return false;
                 permanentItems.Add(item.id);
                 OnItemAdded?.Invoke(item);
+                Transform slot = GameObject.Instantiate(slotPrefab,Permanents_Grid.transform);
+                slot.gameObject.GetComponent<ContainerItemUseCase>().Item = item;
                 return true;
 
             case ItemType.Consumable:
@@ -81,6 +153,16 @@ public class InventoryController : MonoBehaviour
             case ItemType.Permanent:
                 if (!permanentItems.Remove(item.id)) return false;
                 OnItemRemoved?.Invoke(item);
+                foreach (Transform child in Permanents_Grid.transform)
+                {
+                    ContainerItemUseCase container = child.gameObject.GetComponent<ContainerItemUseCase>();
+                    if (container != null && container.Item != null && container.Item.id == item.id)
+                    {
+                        GameObject.Destroy(child.gameObject);
+                        break;
+                    }
+                }
+
                 return true;
 
             case ItemType.Consumable:
@@ -158,7 +240,28 @@ public class InventoryController : MonoBehaviour
 
     public void ToggleInventory()
     {
-        
+        _isInventoryOpen = !_isInventoryOpen;
+
+        inventoryPanel.SetActive(_isInventoryOpen);
+
+    }
+
+    public void EquipMask(string maskId)
+    {
+        if (string.IsNullOrEmpty(maskId)) return;
+        if (!permanentItems.Contains(maskId)) return;
+        equippedMaskId = maskId;
+    }
+    
+    public void UnequipMask()
+    {
+        equippedMaskId = null;
+    }
+    public ItemData GetEquippedMask()
+    {
+        if (string.IsNullOrEmpty(equippedMaskId)) return null;
+        return GetItemData(equippedMaskId);
     }
 }
+
 
