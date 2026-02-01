@@ -1,0 +1,72 @@
+{
+    "width": 15,
+    "height": 15,
+    "cells": [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 0,
+        0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+        0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0,
+        0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 0, 1, 0, 0, 0,
+        0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+        0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0,
+        0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0,
+        0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0,
+        0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0,
+        0, 0, 0, 0, 0, 1, 0, 1, 5, 1, 0, 0, 0, 1, 0,
+        0, 1, 1, 1, 1, 1, 1, 1, 6, 1, 1, 1, 1, 1, 0,
+        0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    ],
+    "startX": 1,
+    "startY": 1,
+    "endX": 13,
+    "endY": 13,
+    "cellSecret": [
+        {
+            "x": 5,
+            "z":2,
+            "type": 1
+        },
+        {
+            "x": 9,
+            "z":4,
+            "type": 2
+        }
+    ],
+    "cellMonster": [
+        {
+            "x": 10,
+            "z":1,
+            "type": 1
+        },
+        {
+            "x": 8,
+            "z":10,
+            "type": 2
+        }
+    ],
+    "cellObject": [
+        {
+            "x": 8,
+            "z":11,
+            "idPrefab": 0,
+            "isWalkable": false
+        }
+    ]
+}
+
+/// <summary>
+/// Tipos de celdas que puede tener el grid del mapa
+/// </summary>
+
+public enum CellType
+{
+    Obstacle = 0,  // Obstáculo - no se puede caminar
+    Path = 1,      // Camino - se puede caminar
+    Entry = 2,       // Puerta - entrada
+    Exit = 3,        // Puerta - salida, No sirve, osea no hace nada
+    WallChanger = 4,
+    Monster = 5,
+    Objeto = 6
+}
