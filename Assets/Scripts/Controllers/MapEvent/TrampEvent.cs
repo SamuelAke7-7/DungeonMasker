@@ -1,12 +1,12 @@
 using UnityEngine;
-using UnityEngine.UI;
+using System.Collections;
 using TMPro;
 
 
 public class TrampEvent : MonoBehaviour, IInteractuable
 {
     public float damage = 100f;
-    private string message = "AUCH!!!!!";
+    private string message = "AUCH!!!!! UNA TRAMPA";
     
     private MapEventType mapEventType = MapEventType.Trap;
 
@@ -22,11 +22,21 @@ public class TrampEvent : MonoBehaviour, IInteractuable
         MapEventManager.instance.canvasBlinker.TriggerBlink();
 
         Debug.Log("TrampEvent: duringContact");
+        StartCoroutine(TimerEnd());
+    }
+
+    IEnumerator TimerEnd()
+    {
+        yield return new WaitForSeconds(3);
+        afterContact();
     }
     
     public void afterContact()
     {
         MapEventManager.instance.panel.SetActive(false);
+        PlayerController.Instance.SetAbleWalk(true);
+        PlayerInteractController.Instance.SetCanInteract(true);
+        Destroy(gameObject);
     }
     
     public void beforeContact()
