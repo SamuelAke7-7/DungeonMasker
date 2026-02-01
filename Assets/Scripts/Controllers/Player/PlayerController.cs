@@ -2,9 +2,17 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+
+    [Header("Configuración de Movimiento")]
+    [SerializeField] public float life = 100f;
+    [SerializeField] public float mana = 100f;
+    private PlayerStatusEnum status = PlayerStatusEnum.Normal;
+
     [Header("Configuración de Movimiento")]
     [SerializeField] private float blockSize = 1f; // Tamaño de cada bloque
     [SerializeField] private float moveSpeed = 5f; // Velocidad de movimiento entre bloques
@@ -18,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 previousStickValue = Vector2.zero; // Valor anterior del stick para detectar cambios
     
     public static PlayerController Instance;
+    public GameObject deadScreenImage;
 
     void Awake(){
         Instance = this;
@@ -238,5 +247,25 @@ public class PlayerController : MonoBehaviour
 
     public void SetAbleWalk(bool isWalkable){
         this.canMove = isWalkable;
+    }
+
+    public void addLife(float lifeGained){
+        LifebarManager.instance.addLife(lifeGained);
+    }
+
+    public void DoDamage(float damage){
+        LifebarManager.instance.removeLife(damage);
+
+        if(LifebarManager.instance.vida < 1f){
+            deadScreenImage.SetActive(true);
+            canMove = false;
+
+            StartCoroutine(delayBeforeLoadingMainScreen(5f));
+        }
+    }
+
+    IEnumerator delayBeforeLoadingMainScreen(float delay){
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("Menu");
     }
 }
