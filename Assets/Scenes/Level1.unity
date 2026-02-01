@@ -587,12 +587,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2531955964121812743, guid: 51d2d8a916d42034eaa216993b957994, type: 3}
       propertyPath: listObjectPrefabs.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2531955964121812743, guid: 51d2d8a916d42034eaa216993b957994, type: 3}
       propertyPath: 'listObjectPrefabs.Array.data[4]'
       value: 
       objectReference: {fileID: 8309409348417710847, guid: 49f5e47934f7b164dad895f9e818698f, type: 3}
+    - target: {fileID: 2531955964121812743, guid: 51d2d8a916d42034eaa216993b957994, type: 3}
+      propertyPath: 'listObjectPrefabs.Array.data[5]'
+      value: 
+      objectReference: {fileID: 3937058946012365821, guid: 61eb0ea234558a34baa1104c724815ea, type: 3}
     - target: {fileID: 3607608691740184205, guid: 51d2d8a916d42034eaa216993b957994, type: 3}
       propertyPath: m_Name
       value: GridMapManager
