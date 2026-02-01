@@ -1,0 +1,17 @@
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using System.Collections;
+using System;
+
+public class DeadScreenManager : MonoBehaviour
+{
+
+    public RawImage deadScreenImage;
+    private static DeadScreenManager instance;
+
+    private void awake(){
+        instance = this;
+    }
+
+}
