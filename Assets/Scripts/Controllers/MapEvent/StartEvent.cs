@@ -48,6 +48,7 @@ public class StartEvent : MonoBehaviour, IInteractuable
         }
         PlayerController.Instance.SetAbleWalk(true);
         PlayerInteractController.Instance.SetCanInteract(true);
+        Destroy(gameObject);
     }
     
     public void beforeContact()
