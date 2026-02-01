@@ -21,6 +21,8 @@ public class GridMapController : MonoBehaviour
     [SerializeField] private Color pathColor = Color.green;
     [SerializeField] private Color doorColor = Color.blue;
     [SerializeField] private Color monsterColor = Color.aquamarine;
+
+    public Material[] listMaterialWalls;
     
     public GameObject wallPrefab;
     public GameObject wallSecretPrefab;
@@ -85,6 +87,7 @@ public class GridMapController : MonoBehaviour
                     TypeMask typeMask = listCellSecrets.FirstOrDefault((cell) => cell.x == x && cell.z == y ).type;
                     wallChanger.GetComponent<WallSecretBehaviourUseCase>().type = typeMask;
                     wallChanger.transform.parent = wallParent;
+                    wallChanger.GetComponent<MeshRenderer>().material = listMaterialWalls[(int)typeMask - 1];
                 } else if(cellType == CellType.Monster){
                     Vector3 worldPosition = GridToWorld(x, y);
                     worldPosition.x += 0.5f;

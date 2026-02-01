@@ -7,11 +7,20 @@ public class PlayerInteractController : MonoBehaviour
     public float distance = 1;
     private bool gamepadInputProcessed = false; // Flag para evitar procesar el mismo input múltiples veces
     private Vector2 previousStickValue = Vector2.zero; // Valor anterior del stick para detectar cambios
-    
+    private bool canInteract = true;
+
+    public static PlayerInteractController Instance;
+
+    void Start(){
+        Instance = this;
+    }
 
     // Update is called once per frame
     void Update()
     {
+
+        if(!canInteract) return;
+
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, distance, layersToDetect))
@@ -65,5 +74,9 @@ public class PlayerInteractController : MonoBehaviour
         {
             objectInteract.GetComponent<IInteractObject>().execute();
         }
+    }
+
+    public void SetCanInteract(bool canInteract){
+        this.canInteract = canInteract;
     }
 }
