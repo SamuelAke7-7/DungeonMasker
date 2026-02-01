@@ -31,7 +31,7 @@
         0, 1, 1, 1, 0, 0, 0, 0, 0, 5, 5, 0, 0, 1, 1, 1, 1, 1, 6, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 5, 5, 1, 1, 1, 1, 0,
         0, 1, 1, 1, 1, 1, 1, 0, 0, 5, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0,
         0, 5, 0, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0,
-        0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
+        0, 1, 1, 1, 1, 1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     ],
@@ -85,13 +85,14 @@
         { "x": 18, "z": 24,  "idPrefab": 5, "isWalkable": false },
         { "x": 21, "z": 1,  "idPrefab": 1, "isWalkable": false },
         { "x": 16, "z": 4,  "idPrefab": 5, "isWalkable": false },
-        { "x": 25, "z": 1,  "idPrefab": 1, "isWalkable": false },
-        { "x": 33, "z": 3,  "idPrefab": 1, "isWalkable": false },
-        { "x": 35, "z": 8,  "idPrefab": 1, "isWalkable": false },
-        { "x": 18, "z": 12, "idPrefab": 1, "isWalkable": false },
-        { "x": 10, "z": 17, "idPrefab": 1, "isWalkable": false },
-        { "x": 31, "z": 18, "idPrefab": 1, "isWalkable": false },
-        { "x": 10, "z": 27, "idPrefab": 1, "isWalkable": false }
+        { "x": 25, "z": 1,  "idPrefab": 1, "isWalkable": true },
+        { "x": 33, "z": 3,  "idPrefab": 1, "isWalkable": true },
+        { "x": 35, "z": 8,  "idPrefab": 9, "isWalkable": true },
+        { "x": 18, "z": 12, "idPrefab": 6, "isWalkable": true },
+        { "x": 10, "z": 17, "idPrefab": 7, "isWalkable": true },
+        { "x": 31, "z": 18, "idPrefab": 1, "isWalkable": true },
+        { "x": 10, "z": 27, "idPrefab": 1, "isWalkable": true },
+        { "x": 6, "z": 29, "idPrefab": 8, "isWalkable": true }
     ]
 }
 

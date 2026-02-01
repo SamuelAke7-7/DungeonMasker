@@ -105,7 +105,7 @@ public class InventoryController : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
         // register starting items
 
         // startingItems.Add(new ItemData()

@@ -50,6 +50,34 @@ public class ObjectMaskController : MonoBehaviour
                 Debug.Log("Regreso a prisor mask");
             } else {
                 
+                switch (contadorMask)
+                {
+                    case 1: 
+                        if(InventoryController.Instance.hasSlimeMask){
+                            actualMask = TypeMask.Slime;
+                            Debug.Log("Se Puso Mascara slime");
+                            return;
+                        }
+                        break;
+                    case 2: 
+                        if(InventoryController.Instance.hasKoboldMask){
+                            actualMask = TypeMask.Kobold;
+                            Debug.Log("Se Puso Mascara kobold");
+                            return;
+                        }
+                        break;
+                    case 3: 
+                        if(InventoryController.Instance.hasSkeletonMask){
+                            actualMask = TypeMask.Skeleton;
+                            Debug.Log("Se Puso Mascara Skeleton");
+                            return;
+                        }
+                    break;
+
+                    default:
+                    break;
+                }
+
                 TypeMask cellType = (TypeMask)contadorMask;
                 string description = cellType.GetDescription();
                 Debug.Log($"No encontro mask {description}" );

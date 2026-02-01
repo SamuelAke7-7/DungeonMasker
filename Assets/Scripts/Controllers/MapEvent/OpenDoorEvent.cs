@@ -14,7 +14,11 @@ public class OpenDoorEvent : MonoBehaviour, IInteractuable
         // text.text = message;
         // text.gameObject.GetComponent<TextMeshProUGUI>().enabled = true;
         MapEventManager.instance.panel.SetActive(true);
-        MapEventManager.instance.panel.GetComponentInChildren<TextMeshProUGUI>().text = messagePositivo;
+        if(InventoryController.Instance.hasPurpleOrb){
+            MapEventManager.instance.panel.GetComponentInChildren<TextMeshProUGUI>().text = messagePositivo;
+        } else {
+            MapEventManager.instance.panel.GetComponentInChildren<TextMeshProUGUI>().text = messageNegativo;
+        }
 
         MapEventManager.instance.panel.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
 
@@ -33,9 +37,13 @@ public class OpenDoorEvent : MonoBehaviour, IInteractuable
         MapEventManager.instance.panel.SetActive(false);
         PlayerController.Instance.SetAbleWalk(true);
         PlayerInteractController.Instance.SetCanInteract(true);
-        Vector2Int gridCell = GridMapController.Instance.WorldToGrid(transform.position);
-        GridMapController.Instance.ChangeTypeCell(gridCell.x,gridCell.y,CellType.Path);
-        Destroy(gameObject);
+
+        if(InventoryController.Instance.hasPurpleOrb){
+            Vector2Int gridCell = GridMapController.Instance.WorldToGrid(transform.position);
+            GridMapController.Instance.ChangeTypeCell(gridCell.x,gridCell.y,CellType.Path);
+            Destroy(gameObject);
+        }
+       
     }
     
     public void beforeContact()
