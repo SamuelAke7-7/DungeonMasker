@@ -37,13 +37,21 @@ public class StartEvent : MonoBehaviour, IInteractuable
             MapEventManager.instance.panel.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
             MapEventManager.instance.panel.SetActive(false);
             MapEventManager.instance.ghostImage.gameObject.SetActive(false);
-            Destroy(MapEventManager.instance.ghostImage.gameObject);
+            //Destroy(MapEventManager.instance.ghostImage.gameObject);
         }
+        PlayerController.Instance.SetAbleWalk(true);
+        PlayerInteractController.Instance.SetCanInteract(true);
     }
     
     public void beforeContact()
     {
         
+    }
+
+    IEnumerator TimerEnd()
+    {
+        yield return new WaitForSeconds(3);
+        afterContact();
     }
 
     IEnumerator ShowText(TextMeshProUGUI textComponent, float delay)
@@ -66,5 +74,6 @@ public class StartEvent : MonoBehaviour, IInteractuable
                 yield return new WaitForSeconds(delay);
             }
         }
+        StartCoroutine(TimerEnd());
     }
 }

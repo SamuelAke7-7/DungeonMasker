@@ -15,25 +15,4 @@ public class MapEventManager : MonoBehaviour
     {
         instance = this;
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        // Comprobamos si el objeto con el que colisionamos implementa IInteractuable
-        if (other.gameObject.TryGetComponent(out IInteractuable interactuable))
-        {
-            Debug.Log("Objeto interactuable detectado: " + other.name);
-            interactuable.duringContact();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.TryGetComponent(out IInteractuable interactuable))
-        {
-            Debug.Log("Objeto interactuable detectado: " + other.name);
-            interactuable.afterContact();
-        }
-
-
-    }
 }

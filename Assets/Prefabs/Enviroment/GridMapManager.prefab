@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2531955964121812743}
   - component: {fileID: 5801263663502861396}
   - component: {fileID: 6721028045497078297}
+  - component: {fileID: 7766705172069209433}
   m_Layer: 0
   m_Name: GridMapManager
   m_TagString: Untagged
@@ -52,24 +53,29 @@ MonoBehaviour:
   gridWidth: 10
   gridHeight: 10
   cellSize: 1
-  jsonFileName: maze_example.json
+  jsonFileName: DungeonLevel1.json
   obstacleColor: {r: 1, g: 0, b: 0, a: 1}
   pathColor: {r: 0, g: 1, b: 0, a: 1}
   doorColor: {r: 0, g: 0, b: 1, a: 1}
   monsterColor: {r: 0.4980392, g: 1, b: 0.8313726, a: 1}
   listMaterialWalls:
   - {fileID: 2100000, guid: a6f95673ce9cc094fa7f80f77b40bee2, type: 2}
-  - {fileID: 2100000, guid: e4d65ca4e2457224085fcc2f31eb28f4, type: 2}
+  - {fileID: 2100000, guid: d600b502cf2aa024f96995142c5fdcfd, type: 2}
+  - {fileID: 2100000, guid: 232e0f6f0ce6ca541b0d98a85517fbea, type: 2}
   wallPrefab: {fileID: 3824148903420253234, guid: 77e04bd6acc71a448b2335efc710e08c, type: 3}
   wallSecretPrefab: {fileID: 3824148903420253234, guid: 2df6ea911dfd9fd48ac1d565aafebd85, type: 3}
   listObjectPrefabs:
+  - {fileID: 1222254486792330842, guid: 7c5a2588501200549a82a79dc55058db, type: 3}
   - {fileID: 7572377397815424990, guid: ca10f1c6bef60ad4392f422618a4aeda, type: 3}
+  - {fileID: 1018415155202536748, guid: 520dab00514524a4b861a2fa6fe6e416, type: 3}
+  - {fileID: 2974300601038611190, guid: a62e29b546471ab499163829f25edb90, type: 3}
   wallParent: {fileID: 740499473445247314}
   enemyParent: {fileID: 8286783952553156322}
   objectParent: {fileID: 1760164857980023037}
   listMonsterPrefabs:
   - {fileID: 66043259475815006, guid: 662e49f1fa082744e8939c5c0c70d27b, type: 3}
   - {fileID: 1561040174337516386, guid: d6b49dcb0a6891b499135b8549bd499d, type: 3}
+  - {fileID: 6061528258552545992, guid: f8115921f187b3745a8624bae26950e9, type: 3}
 --- !u!114 &5801263663502861396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,11 +108,28 @@ MonoBehaviour:
   zoneStartNormalized: 0.4
   zoneEndNormalized: 0.6
   damageToEnemy: 25
+  damageToPlayer: 10
   barOffsetFromBottom: 80
   speedIncrementPerAttempt: 0.15
   maxCursorSpeed: 2.5
   zoneWidthDecrementPerAttempt: 0.03
   minZoneWidthNormalized: 0.08
+--- !u!114 &7766705172069209433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3607608691740184205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55fe7b8027a9f3b43be9c339e1c51bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MaskIUController
+  objectMaskColor: {fileID: 0}
+  objectMaskmiddle: {fileID: 0}
+  colorSlime: {r: 0, g: 1, b: 0.1294117, a: 0.1058824}
+  colorKobold: {r: 1, g: 0, b: 0.04082775, a: 0.1058824}
 --- !u!1 &6708095682603537130
 GameObject:
   m_ObjectHideFlags: 0

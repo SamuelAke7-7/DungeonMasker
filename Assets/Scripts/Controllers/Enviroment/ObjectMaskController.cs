@@ -26,10 +26,10 @@ public class ObjectMaskController : MonoBehaviour
         }
         else if (keyboard.digit2Key.wasPressedThisFrame)
         {
-            ToggleObjectWithMaskEffect(TypeMask.Skeleton);
+            ToggleObjectWithMaskEffect(TypeMask.Kobold);
         }else if (keyboard.digit3Key.wasPressedThisFrame)
         {
-            ToggleObjectWithMaskEffect(TypeMask.Prisor);
+            ToggleObjectWithMaskEffect(TypeMask.Skeleton);
         }
     }
 }

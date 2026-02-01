@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
+using System.Collections;
 using TMPro;
 
 public class TreasureEvent : MonoBehaviour, IInteractuable
@@ -17,14 +17,22 @@ public class TreasureEvent : MonoBehaviour, IInteractuable
 
         MapEventManager.instance.panel.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
 
-        Debug.Log("TreasureEvent: duringContact");
+        StartCoroutine(TimerEnd());
+    }
+
+    IEnumerator TimerEnd()
+    {
+        yield return new WaitForSeconds(3);
+        afterContact();
     }
     
     public void afterContact()
     {
         // text.gameObject.GetComponent<TextMeshProUGUI>().enabled = false;
         MapEventManager.instance.panel.SetActive(false);
-        
+        PlayerController.Instance.SetAbleWalk(true);
+        PlayerInteractController.Instance.SetCanInteract(true);
+        Destroy(gameObject);
     }
     
     public void beforeContact()
