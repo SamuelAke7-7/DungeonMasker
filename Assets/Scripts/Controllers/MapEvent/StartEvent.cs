@@ -6,7 +6,8 @@ using TMPro;
 
 public class StartEvent : MonoBehaviour, IInteractuable
 {
-
+    public Sprite sprite;
+    public bool isMainDialogue = false;
     public string[] sentences = {
         "OH! otro maldito humano!",
     "¡Ay! ¡Ay! ¡Ay! YO TE MALDIGO!!!",
@@ -22,9 +23,15 @@ public class StartEvent : MonoBehaviour, IInteractuable
         Debug.Log("StartEvent: duringContact");
         if(MapEventManager.instance.ghostImage != null){
             MapEventManager.instance.panel.GetComponentInChildren<TextMeshProUGUI>().text = "";
+            MapEventManager.instance.ghostImage.gameObject.GetComponent<Image>().sprite = sprite;
             MapEventManager.instance.ghostImage.gameObject.SetActive(true);
             MapEventManager.instance.panel.SetActive(true);
-            StartCoroutine(ShowText(MapEventManager.instance.panel.GetComponentInChildren<TextMeshProUGUI>(), 0.05f));
+            if (isMainDialogue){
+                StartCoroutine(ShowText(MapEventManager.instance.panel.GetComponentInChildren<TextMeshProUGUI>(), 0.05f));
+            } else {
+                NormalShowText(0.05f);
+            }
+            
         }else{
             Debug.Log("StartEvent: duringContact not executed due to null ghostImage");
         }
@@ -34,7 +41,6 @@ public class StartEvent : MonoBehaviour, IInteractuable
     public void afterContact()
     {
         if(MapEventManager.instance.ghostImage.gameObject != null){
-            MapEventManager.instance.panel.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
             MapEventManager.instance.panel.SetActive(false);
             MapEventManager.instance.ghostImage.gameObject.SetActive(false);
             //Destroy(MapEventManager.instance.ghostImage.gameObject);
@@ -74,6 +80,12 @@ public class StartEvent : MonoBehaviour, IInteractuable
                 yield return new WaitForSeconds(delay);
             }
         }
+        StartCoroutine(TimerEnd());
+    }
+
+    void NormalShowText(float delay)
+    {
+        MapEventManager.instance.panel.GetComponentInChildren<TextMeshProUGUI>().text = sentences[0];
         StartCoroutine(TimerEnd());
     }
 }

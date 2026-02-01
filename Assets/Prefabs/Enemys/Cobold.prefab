@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyCombatUseCase
   life: 100
-  strength: 25
+  strength: 10
   animManager: {fileID: 0}
 --- !u!1 &7502821433817272074
 GameObject:

@@ -230,8 +230,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 61.37
+  m_fontSizeBase: 61.37
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -543,14 +543,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2873730008668022935}
   - component: {fileID: 152319889836180990}
-  - component: {fileID: 6265096722706943775}
+  - component: {fileID: 3264374985804421173}
   m_Layer: 5
   m_Name: GhostRawImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2873730008668022935
 RectTransform:
   m_ObjectHideFlags: 0
@@ -578,7 +578,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7228180950105856164}
   m_CullTransparentMesh: 1
---- !u!114 &6265096722706943775
+--- !u!114 &3264374985804421173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -587,9 +587,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7228180950105856164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -598,13 +598,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: d7abd91a466e64c888598ee2b1d26391, type: 3}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+  m_Sprite: {fileID: 21300000, guid: d7abd91a466e64c888598ee2b1d26391, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7719037716336986786
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,7 +789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4694867021557825268
 RectTransform:
   m_ObjectHideFlags: 0
@@ -804,8 +807,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -289.112}
-  m_SizeDelta: {x: 0, y: -578.224}
+  m_AnchoredPosition: {x: 0, y: -406.36523}
+  m_SizeDelta: {x: 0, y: -812.73}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9053841935141974623
 CanvasRenderer:
