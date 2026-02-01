@@ -2,13 +2,17 @@ using UnityEngine;
 
 public class InteractDemoUseCase : MonoBehaviour, IInteractObject
 {
+    public bool isActivate = false;
     public void execute()
     {
-        Debug.Log("Esta recogiendo un cofre");
+        isActivate = false;
+        PlayerController.Instance.SetAbleWalk(false);
+        PlayerInteractController.Instance.SetCanInteract(false);
+        GetComponent<IInteractuable>().duringContact();
     }
 
     public bool isActivatedAlready()
     {
-        return false;
+        return isActivate;
     }
 }

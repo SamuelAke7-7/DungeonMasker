@@ -14,7 +14,7 @@ public class GridMapController : MonoBehaviour
     [SerializeField] private int gridWidth = 10;
     [SerializeField] private int gridHeight = 10;
     [SerializeField] private float cellSize = 1f;
-    [SerializeField] private string jsonFileName = "dungeon_map.json";
+    [SerializeField] private string jsonFileName = "DungeonLevel1.json";
     
     [Header("Colores de Gizmos")]
     [SerializeField] private Color obstacleColor = Color.red;

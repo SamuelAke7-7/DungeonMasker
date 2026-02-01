@@ -18,6 +18,7 @@ public class StartCombatUseCase : MonoBehaviour
     [SerializeField] private float zoneStartNormalized = 0.4f;
     [SerializeField] private float zoneEndNormalized = 0.6f;
     [SerializeField] private float damageToEnemy = 25f;
+    [SerializeField] private float damageToPlayer = 10f;
     [SerializeField] private float barOffsetFromBottom = 80f;
     [Tooltip("Cuánto aumenta la velocidad del cursor tras cada intento.")]
     [SerializeField] private float speedIncrementPerAttempt = 0.15f;
@@ -193,6 +194,7 @@ public class StartCombatUseCase : MonoBehaviour
                         Debug.Log("Jugador recibió daño");
                         enemyCombat.DoDamage();
                         attemptResolved = true;
+                        PlayerController.Instance.DoDamage(damageToPlayer);
                     }
                 }
 
