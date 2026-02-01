@@ -75,6 +75,11 @@ public class StartCombatUseCase : MonoBehaviour
     }
 
     private void CreateCombatMinigameUI(){
+
+        if (MaskIUController.Instance.GetTypeMask() == TypeMask.Prisor){
+            MaskIUController.Instance.objectMaskmiddle.gameObject.SetActive(false);
+        }
+        
         _minigameCanvasRoot = new GameObject("CombatMinigameCanvas");
         var canvas = _minigameCanvasRoot.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
@@ -102,8 +107,15 @@ public class StartCombatUseCase : MonoBehaviour
         barRect.pivot = new Vector2(0.5f, 0.5f);
         barRect.sizeDelta = new Vector2(barWidth, barHeight);
         barRect.anchoredPosition = new Vector2(0, barLocalY);
-        horizontalBar.AddComponent<Image>().color = new Color(0.2f, 0.2f, 0.2f, 0.9f);
 
+        if (MaskIUController.Instance.GetTypeMask() == TypeMask.Slime)
+        {
+            horizontalBar.AddComponent<Image>().color = new Color(0.2f, 0.8f, 0.2f, 0.9f);
+        } else
+        {
+            horizontalBar.AddComponent<Image>().color = new Color(0.2f, 0.2f, 0.2f, 0.9f);
+        }
+        
         var zoneWidth = (zoneEndNormalized - zoneStartNormalized) * barWidth;
         var zoneCenterX = (zoneStartNormalized + zoneEndNormalized - 1f) * halfBar;
         var sweetSpot = new GameObject("SweetSpotZone");
@@ -125,6 +137,10 @@ public class StartCombatUseCase : MonoBehaviour
         _cursorRect.sizeDelta = new Vector2(10, barHeight + 16);
         _cursorRect.anchoredPosition = new Vector2(-halfBar, barLocalY);
         cursor.AddComponent<Image>().color = Color.white;
+
+        if (MaskIUController.Instance.GetTypeMask() == TypeMask.Prisor){
+            MaskIUController.Instance.objectMaskmiddle.gameObject.SetActive(true);
+        }
     }
 
     private void RandomizeZone(float barLocalY, float currentZoneWidthNormalized){
