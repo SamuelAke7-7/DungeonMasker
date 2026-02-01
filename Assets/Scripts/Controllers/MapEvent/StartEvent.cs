@@ -7,6 +7,7 @@ using TMPro;
 public class StartEvent : MonoBehaviour, IInteractuable
 {
     public Sprite sprite;
+    public float timeToShowText = 3f;
     public bool isMainDialogue = false;
     public string[] sentences = {
         "OH! otro maldito humano!",
@@ -56,7 +57,7 @@ public class StartEvent : MonoBehaviour, IInteractuable
 
     IEnumerator TimerEnd()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(timeToShowText);
         afterContact();
     }
 
