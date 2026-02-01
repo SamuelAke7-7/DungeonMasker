@@ -26,6 +26,7 @@ public class ObjectMaskController : MonoBehaviour
 
     void Update(){
         ProcessKeyboardInput();
+        ProcessGamepadInput();
     }
     private void ProcessKeyboardInput()
     {
@@ -35,6 +36,20 @@ public class ObjectMaskController : MonoBehaviour
         
         // Movimiento hacia adelante (W) o hacia atrás (S)
         if (keyboard.qKey.wasPressedThisFrame)
+        {
+            ChangeMask();
+        }
+    }
+
+    private void ProcessGamepadInput()
+    {
+        Gamepad gamepad = Gamepad.current;
+        if (gamepad == null)
+        {
+            return;
+        }
+
+        if (gamepad.bButton.wasPressedThisFrame)
         {
             ChangeMask();
         }
