@@ -10,12 +10,12 @@ public class MaskIUController : MonoBehaviour
     public Color colorKobold = new Color(1f, 0f, 0.04082775f, 0.1058824f);
     public static MaskIUController Instance;
 
-    void Start(){
+    void Awake(){
         Instance = this;
     }
 
     public TypeMask GetTypeMask(){
-        return TypeMask.Prisor;
+        return ObjectMaskController.Instance.actualMask;
     }
 
     public void ChangeMask(){

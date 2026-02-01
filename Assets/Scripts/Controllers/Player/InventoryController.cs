@@ -92,6 +92,11 @@ public class InventoryController : MonoBehaviour
     {
         Gamepad gamepad = Gamepad.current;
 
+        if (gamepad == null)
+        {
+            return;
+        }
+
         if (gamepad.yButton.wasPressedThisFrame || gamepad.triangleButton.wasPressedThisFrame)
         {
             ToggleInventory();
@@ -100,7 +105,7 @@ public class InventoryController : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
         // register starting items
 
         // startingItems.Add(new ItemData()
