@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7732997236534250092}
   - component: {fileID: 1567230405564578128}
   - component: {fileID: 8569596857211508395}
+  - component: {fileID: 5013934254579493109}
   - component: {fileID: 8389747936155659304}
   - component: {fileID: 1006913203279337763}
   m_Layer: 0
@@ -93,6 +94,22 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5013934254579493109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2844254784236816535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee6cb06837750e043b5563e1dc39d490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractController
+  layersToDetect:
+    serializedVersion: 2
+    m_Bits: 192
+  distance: 1
 --- !u!136 &8389747936155659304
 CapsuleCollider:
   m_ObjectHideFlags: 0
